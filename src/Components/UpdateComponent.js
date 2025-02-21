@@ -8,20 +8,14 @@ const UpdateComponent = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
-    console.log(id);
-    const users = useSelector((state) => state.users);
-    console.log(users);
-    console.log(typeof (id))
-    const existingUser = users.find(ele => ele.id === Number(id));
-    console.log(existingUser)
+    const users = useSelector((state) => state.users.users);
+    const existingUser = users.find(ele => ele.id === id);
     const [uname, setName] = useState(existingUser ? existingUser.name : '');
     const [uemail, setEmail] = useState(existingUser ? existingUser.email : '');
-    console.log(existingUser);
+
     const handleUpdate = (event) => {
-        console.log(event);
         event.preventDefault();
         dispatch(updateUser({ id: existingUser.id, name: uname, email: uemail }));
-
         navigate('/')
     }
 

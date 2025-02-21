@@ -2,13 +2,14 @@ html,
 body {
   height: 100%;
 }
-.container 
-{
+
+.container {
   background-color: #fff !important;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
   padding: 3rem;
-  
+
 }
+
 .form-signin {
   max-width: 330px;
   padding: 1rem;
@@ -32,11 +33,9 @@ body {
   border-top-right-radius: 0;
 }
 
-.bg-secondary
-{
- 
-  width: 20%;
-  border: none !important;
+.bg-secondary {
+
+  width: 50%;
   background-color: #fff !important;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   position: absolute;
@@ -45,9 +44,7 @@ body {
 
 }
 
-.text_color
-{
+.text_color {
   color: black;
   font-weight: 600;
-
 }

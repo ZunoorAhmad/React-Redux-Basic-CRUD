@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addUser } from '../redux/UserReducer';
+import { createUser } from '../redux/UserReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,11 +9,12 @@ const CreateComponent = () => {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users);
     const navigate = useNavigate();
-    console.log(users);
 
     const handleSubmit = (e) => {
+        console.log("Handle submit called");
         e.preventDefault();
-        dispatch(addUser({ id: users[users.length - 1].id + 1, name, email }));
+        dispatch(createUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email }));
+        // dispatch(addUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email }));
         navigate('/');
     }
 
