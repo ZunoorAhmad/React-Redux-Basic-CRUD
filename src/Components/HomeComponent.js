@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser, getUsers } from '../redux/UserReducer';
 import ChildComponent from './ChildComponent';
+import { Audio } from 'react-loader-spinner';
 
 const HomeComponent = () => {
     const [booleanState, setBooleanState] = useState(false);
@@ -24,14 +25,25 @@ const HomeComponent = () => {
     }
 
     const filterUsers = (e) => {
-        console.log(e.target.value);
         const userInput = e.target.value;
         const usersToShow = users.filter((ele) => ele.name.includes(userInput) || ele.email.includes(userInput));
         setFilteredUsers(usersToShow);
     }
 
     if (loading) {
-        return <><h1>Loading</h1></>
+        return <>
+            <div className="loader">
+                <Audio
+                    height="80"
+                    width="80"
+                    radius="9"
+                    color="green"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle
+                    wrapperClass
+                />
+            </div>
+        </>
     }
 
     return (
@@ -58,18 +70,11 @@ const HomeComponent = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-
-
                                     <Link to={`/edit/${user.id}`} className='btn btn-sm btn-primary'>Edit</Link>
-
-
                                     <button onClick={() => setSelectedId(user)} type="button" className="btn btn-danger"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Delete
                                     </button>
-
-
-
                                 </td>
                             </tr>
                         ))}

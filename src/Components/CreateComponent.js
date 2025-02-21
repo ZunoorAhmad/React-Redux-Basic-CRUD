@@ -11,7 +11,6 @@ const CreateComponent = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        console.log("Handle submit called");
         e.preventDefault();
         dispatch(createUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email }));
         // dispatch(addUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email }));
@@ -25,11 +24,11 @@ const CreateComponent = () => {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor='name'>Name:</label>
-                        <input type='text' name='name' className='form-control form-signin' placeholder='Enter name' onChange={e => setName(e.target.value)} />
+                        <input type='text' name='name' className='form-control' placeholder='Enter name' onChange={e => setName(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor='email'>Email:</label>
-                        <input type='email' name='email' className='form-control form-signin' placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} />
+                        <input type='email' name='email' className='form-control' placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <br />
                     <button className='btn btn-primary'>Submit</button>

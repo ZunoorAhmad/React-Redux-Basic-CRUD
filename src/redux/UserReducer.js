@@ -95,11 +95,9 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(createUser.pending, (state) => {
-                console.log("Create Users Pending State : ", true);
                 state.loading = true;
             })
             .addCase(createUser.fulfilled, (state, action) => {
-                console.log("Create Users API successful : ", action.payload);
                 state.loading = false;
                 state.users.push(action.payload);
             })
@@ -123,7 +121,6 @@ const userSlice = createSlice({
             })
             .addCase(deleteUser.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log(action);
                 const { id } = action.payload;
                 if (id) {
                     state.users = state.users.filter((ele) => ele.id !== id);
@@ -138,7 +135,6 @@ const userSlice = createSlice({
             })
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log(action);
                 const { id, name, email } = action.payload;
                 const user = state.users.find((user) => user.id === id);
                 if (user) {
