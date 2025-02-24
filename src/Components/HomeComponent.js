@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser, getUsers } from '../redux/UserReducer';
 import ChildComponent from './ChildComponent';
 import { Audio } from 'react-loader-spinner';
+import { useToast } from './ToastContext';
 
 const HomeComponent = () => {
     const [booleanState, setBooleanState] = useState(false);
@@ -11,6 +12,7 @@ const HomeComponent = () => {
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [selectedUser, setSelectedId] = useState({});
     const dispatch = useDispatch();
+    const showToast = useToast();
 
     useEffect(() => {
         dispatch(getUsers());
@@ -20,8 +22,13 @@ const HomeComponent = () => {
         setFilteredUsers(users);
     }, [users]);
 
-    const handleDelete = (userId) => {
-        dispatch(deleteUser(userId));
+    const handleDelete = async (userId) => {
+        try {
+            await dispatch(deleteUser(userId)).unwrap();
+            showToast("User Deleted Successfully!", "success");
+        } catch (error) {
+            showToast("Failed to delete user!", "error");
+        }
     }
 
     const filterUsers = (e) => {
@@ -48,7 +55,7 @@ const HomeComponent = () => {
 
     return (
         <>
-            <div>HomeComponent</div><div className='container' style={{ marginTop: '2rem' }}>
+            <div className='container' style={{ marginTop: '2rem' }}>
                 <h2 className='mb-5'>Simple Crud App With Redux</h2>
                 <Link to="/create" className='btn btn-primary my-3 p-3 '>Create +</Link>
                 <div className="input-group mb-3">
