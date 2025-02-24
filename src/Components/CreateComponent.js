@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { createUser } from '../redux/UserReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from './ToastContext';
 
 const CreateComponent = () => {
     const [name, setName] = useState('');
@@ -9,16 +10,21 @@ const CreateComponent = () => {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users);
     const navigate = useNavigate();
+    const showToast = useToast();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(createUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email }));
-        // dispatch(addUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email }));
+        try {
+            await dispatch(createUser({ id: users.users.length > 0 ? users.users[users.users.length - 1].id + 1 : 1, name, email })).unwrap();
+            showToast("User Created Successfully!", "success");
+        } catch (error) {
+            showToast("Failed to create user!", "error");
+        }
         navigate('/');
     }
 
     return (
-        <div className='d-flex  vh-50 justify-content-center align-item-center mt-5'>
+        <div className='d-flex vh-50 justify-content-center align-item-center mt-5'>
             <div className='w-90 border bg-secondary text-white p-5'>
                 <h3 className='text_color'>Add New User</h3>
                 <form onSubmit={handleSubmit}>

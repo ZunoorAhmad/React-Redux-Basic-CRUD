@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeComponent from './Components/HomeComponent';
 import CreateComponent from './Components/CreateComponent';
 import UpdateComponent from './Components/UpdateComponent';
+import { ToastProvider } from "./Components/ToastContext";
 
 function App() {
   return (
-    <>
+    <ToastProvider>
       <div className="App">
-        CRUD (In App JS)
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomeComponent />} />
@@ -17,7 +17,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </div>
-    </>
+    </ToastProvider>
   );
 }
 
